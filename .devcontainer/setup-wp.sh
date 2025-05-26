@@ -41,7 +41,7 @@ if [ ! -f wp-config.php ]; then
     
 # Detect if running inside GitHub Codespaces
 if [ -n "$CODESPACE_NAME" ]; then
-  export WP_URL="https://80-${CODESPACE_NAME}.preview.app.github.dev"
+  export WP_URL="https://80-${CODESPACE_NAME}.app.github.dev/wp"
   echo "Detected Codespace. Using WP_URL: $WP_URL"
 fi
 
