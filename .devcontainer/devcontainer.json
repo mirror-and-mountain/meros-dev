@@ -1,0 +1,39 @@
+{
+  "name": "MEROS",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/var/www/html",
+  "remoteUser": "www-data",
+  "remoteEnv": {
+    "MEROS_THEME": "meros-blocks",
+    "MEROS_PLUGINS": "meros-carousel,meros-dynamic-header",
+    "MEROS_EXTENSIONS": "meros-dynamic-page",
+    "WP_URL": "http://localhost:8000/wp",
+    "WP_TITLE": "Meros Dev",
+    "WP_ADMIN_USER": "dev",
+    "WP_ADMIN_PASSWORD": "password",
+    "WP_ADMIN_EMAIL": "dev@example.com",
+    "WP_DB_HOST": "db",
+    "WP_DB_NAME": "wordpress",
+    "WP_DB_USER": "wpuser",
+    "WP_DB_PASSWORD": "wppassword",
+    "WP_ACTIVE_THEME": "meros-blocks",
+    "VSCODE_SERVER_HOME": "/home/www-data"
+  },
+  "postCreateCommand": "bash -c 'set -x; /usr/local/bin/setup-wp.sh && /usr/local/bin/setup-meros.sh'",
+  "forwardPorts": [80],
+  "features": {},
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "mtxr.sqltools",
+        "mtxr.sqltools-driver-mysql",
+        "bmewburn.vscode-intelephense-client",
+        "laravel.vscode-laravel",
+        "wordpresstoolbox.wordpress-toolbox",
+        "neilbrayfield.php-docblocker",
+        "bradlc.vscode-tailwindcss"
+      ]
+    }
+  }
+}

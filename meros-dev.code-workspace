@@ -1,0 +1,45 @@
+{
+    "folders": [
+        {
+            "name": "html",
+            "path": "."
+        },
+        {
+            "name": "meros-blocks",
+            "path": "wp/wp-content/themes/meros-blocks"
+        },
+        {
+            "name": "meros-framework",
+            "path": "wp/wp-content/themes/meros-blocks/vendor/mirror-and-mountain/meros-framework"
+        },
+        {
+            "name": "meros-dynamic-page",
+            "path": "wp/wp-content/themes/meros-blocks/vendor/mirror-and-mountain/meros-dynamic-page"
+        },
+        {
+            "name": "meros-theme-plugins",
+            "path": "wp/wp-content/themes/meros-blocks/plugins"
+        },
+        {
+            "name": "wordpress",
+            "path": "wp"
+        }
+    ],
+    "settings": {
+        "sqltools.connections": [
+            {
+                "mysqlOptions": {
+                    "authProtocol": "default",
+                    "enableSsl": "Disabled"
+                },
+                "previewLimit": 50,
+                "server": "db",
+                "port": 3306,
+                "driver": "MySQL",
+                "name": "wordpress",
+                "database": "wordpress",
+                "username": "wpuser"
+            }
+        ]
+    }
+}

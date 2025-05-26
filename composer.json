@@ -1,0 +1,14 @@
+{
+    "name": "mirror-and-mountain/meros-dev",
+    "description": "A development environment for Meros themes and packages.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "tmw-mm",
+            "email": "toby@mirrorandmountain.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
