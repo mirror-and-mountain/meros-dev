@@ -38,6 +38,12 @@ if [ ! -f wp-config.php ]; then
     --dbuser="$WP_DB_USER" \
     --dbpass="$WP_DB_PASSWORD" \
     --dbhost="$WP_DB_HOST"
+    
+# Detect if running inside GitHub Codespaces
+if [ -n "$CODESPACE_NAME" ]; then
+  export WP_URL="https://80-${CODESPACE_NAME}.preview.app.github.dev"
+  echo "Detected Codespace. Using WP_URL: $WP_URL"
+fi
 
   echo "DEBUG: WP_URL is currently: $WP_URL"
 
