@@ -35,6 +35,13 @@
         "neilbrayfield.php-docblocker",
         "bradlc.vscode-tailwindcss"
       ]
+    },
+    "codespaces": {
+      "repositories": {
+        "mirror-and-mountain/*": {
+          "permissions": "write-all"
+        }
+      }
     }
   }
 }
