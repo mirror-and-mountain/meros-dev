@@ -32,7 +32,7 @@ if [ ! -f wp-config.php ]; then
   # Download WordPress core files.
   php -d memory_limit=512M /usr/local/bin/wp core download
 
-  # Create wp-config.php.
+  # Create wp-config.php
   wp config create \
     --dbname="$WP_DB_NAME" \
     --dbuser="$WP_DB_USER" \
@@ -41,29 +41,22 @@ if [ ! -f wp-config.php ]; then
 
   # Detect if running inside GitHub Codespaces
   if [ -n "$CODESPACE_NAME" ]; then
-  export WP_URL="https://${CODESPACE_NAME}-80.app.github.dev/wp"
-  echo "Detected Codespace. Using WP_URL: $WP_URL"
+    export WP_URL="https://${CODESPACE_NAME}-80.app.github.dev/wp"
+    echo "Detected Codespace. Using WP_URL: $WP_URL"
+
+    # Add Codespaces HTTPS/proxy fix before ABSPATH definition
+    sed -i '/\/\*\* Sets up WordPress vars and included files\. \*\//i \
+if (isset($_SERVER["HTTP_X_FORWARDED_HOST"]) && isset($_SERVER["HTTP_X_FORWARDED_PROTO"])) {\n\
+    $_SERVER["HTTP_HOST"] = $_SERVER["HTTP_X_FORWARDED_HOST"];\n\
+    $_SERVER["HTTPS"] = $_SERVER["HTTP_X_FORWARDED_PROTO"] === "https" ? "on" : "off";\n\
+}\n' wp-config.php
+  else
+    export WP_URL="http://localhost/wp"
+  fi
 
   echo "DEBUG: WP_URL is currently: $WP_URL"
 
-  # Insert proxy fix *before* the ABSPATH definition
-  awk '
-    /define\( *'\''ABSPATH'\''/ {
-      print "// Fix reverse proxy HTTPS detection in GitHub Codespaces"
-      print "if ("
-      print "    isset(\$_SERVER[\"HTTP_X_FORWARDED_HOST\"]) &&"
-      print "    isset(\$_SERVER[\"HTTP_X_FORWARDED_PROTO\"])"
-      print ") {"
-      print "    \$_SERVER[\"HTTP_HOST\"] = \$_SERVER[\"HTTP_X_FORWARDED_HOST\"];"
-      print "    \$_SERVER[\"HTTPS\"] = \$_SERVER[\"HTTP_X_FORWARDED_PROTO\"] === '\"https\"' ? '\"on\"' : '\"off\"';"
-      print "}"
-      print ""
-    }
-    { print }
-  ' wp-config.php > wp-config.tmp && mv wp-config.tmp wp-config.php
-fi
-
-  # Install WordPress.
+  # Install WordPress
   wp core install \
     --url="$WP_URL" \
     --title="$WP_TITLE" \
@@ -71,6 +64,7 @@ fi
     --admin_password="$WP_ADMIN_PASSWORD" \
     --admin_email="$WP_ADMIN_EMAIL" \
     --skip-email
+
 else
   echo "WordPress wp-config.php already exists, skipping installation."
 fi
