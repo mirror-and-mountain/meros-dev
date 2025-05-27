@@ -41,24 +41,27 @@ if [ ! -f wp-config.php ]; then
 
   # Detect if running inside GitHub Codespaces
   if [ -n "$CODESPACE_NAME" ]; then
-    export WP_URL="https://${CODESPACE_NAME}-80.app.github.dev/wp"
-    echo "Detected Codespace. Using WP_URL: $WP_URL"
+  export WP_URL="https://${CODESPACE_NAME}-80.app.github.dev/wp"
+  echo "Detected Codespace. Using WP_URL: $WP_URL"
 
-    echo "DEBUG: WP_URL is currently: $WP_URL"
+  echo "DEBUG: WP_URL is currently: $WP_URL"
 
-    # Patch wp-config.php with Codespaces HTTPS proxy fix
-    echo "" >> wp-config.php
-    echo "// Fix reverse proxy HTTPS detection in GitHub Codespaces" >> wp-config.php
-    cat <<'PHP' >> wp-config.php
-if (
-    isset($_SERVER['HTTP_X_FORWARDED_HOST']) &&
-    isset($_SERVER['HTTP_X_FORWARDED_PROTO'])
-) {
-    $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_X_FORWARDED_HOST'];
-    $_SERVER['HTTPS'] = $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' ? 'on' : 'off';
-}
-PHP
-  fi
+  # Insert proxy fix *before* the ABSPATH definition
+  awk '
+    /define\( *'\''ABSPATH'\''/ {
+      print "// Fix reverse proxy HTTPS detection in GitHub Codespaces"
+      print "if ("
+      print "    isset(\$_SERVER[\"HTTP_X_FORWARDED_HOST\"]) &&"
+      print "    isset(\$_SERVER[\"HTTP_X_FORWARDED_PROTO\"])"
+      print ") {"
+      print "    \$_SERVER[\"HTTP_HOST\"] = \$_SERVER[\"HTTP_X_FORWARDED_HOST\"];"
+      print "    \$_SERVER[\"HTTPS\"] = \$_SERVER[\"HTTP_X_FORWARDED_PROTO\"] === '\"https\"' ? '\"on\"' : '\"off\"';"
+      print "}"
+      print ""
+    }
+    { print }
+  ' wp-config.php > wp-config.tmp && mv wp-config.tmp wp-config.php
+fi
 
   # Install WordPress.
   wp core install \
