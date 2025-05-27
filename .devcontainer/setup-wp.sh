@@ -34,17 +34,17 @@ if [ ! -f wp-config.php ]; then
 
   # Create wp-config.php
   wp config create \
-    --dbname="$WP_DB_NAME" \
-    --dbuser="$WP_DB_USER" \
-    --dbpass="$WP_DB_PASSWORD" \
-    --dbhost="$WP_DB_HOST"
+    --dbname="wordpress" \
+    --dbuser="wpuser" \
+    --dbpass="wppassword" \
+    --dbhost="db"
 
   # Detect if running inside GitHub Codespaces
   if [ -n "$CODESPACE_NAME" ]; then
     export WP_URL="https://${CODESPACE_NAME}-80.app.github.dev/wp"
     echo "Detected Codespace. Using WP_URL: $WP_URL"
 
-    # Add Codespaces HTTPS/proxy fix before ABSPATH definition
+    # Add Codespaces HTTPS/proxy fix (should be before ABSPATH definition)
     sed -i '/\/\*\* Sets up WordPress vars and included files\. \*\//i \
 if (isset($_SERVER["HTTP_X_FORWARDED_HOST"]) && isset($_SERVER["HTTP_X_FORWARDED_PROTO"])) {\n\
     $_SERVER["HTTP_HOST"] = $_SERVER["HTTP_X_FORWARDED_HOST"];\n\

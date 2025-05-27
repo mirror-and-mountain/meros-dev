@@ -44,11 +44,11 @@ clone_repos() {
     rm -rf "$REPO_PATH"
 
     if git clone "$REPO_FORK" "$REPO_PATH"; then
-      echo "✅ Successfully cloned: $item"
+      echo "Successfully cloned: $item"
     elif git clone "$REPO_ORIGIN" "$REPO_PATH"; then
-      echo "✅ Cloned origin as fallback: $item"
+      echo "Cloned origin as fallback: $item"
     else
-      echo "❌ Error: Failed to clone '$item' from both fork and origin."
+      echo "Error: Failed to clone '$item' from both fork and origin."
     fi
   done
 }
