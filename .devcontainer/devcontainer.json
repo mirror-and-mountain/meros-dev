@@ -14,6 +14,11 @@
     "WP_ADMIN_USER": "dev",
     "WP_ADMIN_PASSWORD": "password",
     "WP_ADMIN_EMAIL": "dev@example.com",
+    "WP_DB_HOST": "db",
+    "WP_DB_NAME": "wordpress",
+    "WP_DB_USER": "wpuser",
+    "WP_DB_PASSWORD": "wppassword",
+    "WP_ACTIVE_THEME": "meros-blocks",
     "VSCODE_SERVER_HOME": "/home/www-data"
   },
   "postCreateCommand": "bash -c 'set -x; /usr/local/bin/setup-wp.sh && /usr/local/bin/setup-meros.sh'",
