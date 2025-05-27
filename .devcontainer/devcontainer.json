@@ -5,7 +5,7 @@
   "workspaceFolder": "/var/www/html",
   "remoteUser": "www-data",
   "remoteEnv": {
-    "FORK_OWNER": "<your-github-username>", // Replace with your GitHub username
+    // "FORK_OWNER": "<your-github-username>", // Replace with your GitHub username
     "MEROS_THEME": "meros-blocks",
     "MEROS_PLUGINS": "meros-carousel,meros-dynamic-header",
     "MEROS_EXTENSIONS": "meros-dynamic-page",
