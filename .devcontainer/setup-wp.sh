@@ -34,10 +34,10 @@ if [ ! -f wp-config.php ]; then
 
   # Create wp-config.php
   wp config create \
-    --dbname="wordpress" \
-    --dbuser="wpuser" \
-    --dbpass="wppassword" \
-    --dbhost="db"
+    --dbname="$WP_DB_NAME" \
+    --dbuser="$WP_DB_USER" \
+    --dbpass="$WP_DB_PASSWORD" \
+    --dbhost="$WP_DB_HOST"
 
   # Detect if running inside GitHub Codespaces
   if [ -n "$CODESPACE_NAME" ]; then
