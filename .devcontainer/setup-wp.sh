@@ -51,7 +51,7 @@ if (isset($_SERVER["HTTP_X_FORWARDED_HOST"]) && isset($_SERVER["HTTP_X_FORWARDED
     $_SERVER["HTTPS"] = $_SERVER["HTTP_X_FORWARDED_PROTO"] === "https" ? "on" : "off";\n\
 }\n' wp-config.php
   else
-    export WP_URL="http://localhost/wp"
+    export WP_URL="http://localhost:8000/wp"
   fi
 
   echo "DEBUG: WP_URL is currently: $WP_URL"
