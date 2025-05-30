@@ -7,7 +7,7 @@
   "remoteEnv": {
     // "FORK_OWNER": "<your-github-username>", // Replace with your GitHub username
     "MEROS_THEME": "meros-blocks",
-    "MEROS_PLUGINS": "meros-carousel,meros-dynamic-header",
+    "MEROS_PLUGINS": "meros-carousel,meros-dynamic-header,meros-text-animations",
     "MEROS_EXTENSIONS": "meros-dynamic-page",
     "WP_TITLE": "Meros Dev",
     "WP_ADMIN_USER": "dev",
