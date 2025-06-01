@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: meros_app
+    container_name: meros_dev_app
     ports:
       - "8000:80"
     volumes:
@@ -15,7 +15,7 @@ services:
   db:
     image: mysql:8
     restart: always
-    container_name: wordpress_db
+    container_name: meros_dev_db
     environment:
       MYSQL_DATABASE: wordpress
       MYSQL_USER: wpuser
