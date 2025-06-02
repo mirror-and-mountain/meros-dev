@@ -72,7 +72,7 @@ RUN find /var/www/html -type d -exec chmod 775 {} +
 RUN find /var/www/html -type f -exec chmod 664 {} +
 
 # Increase PHP upload limit
-RUN echo "upload_max_filesize=64M\npost_max_size=64M" > /usr/local/etc/php/conf.d/uploads.ini
+RUN echo "upload_max_filesize=256M\npost_max_size=256M" > /usr/local/etc/php/conf.d/uploads.ini
 
 # Set the default user to www-data.
 USER www-data
